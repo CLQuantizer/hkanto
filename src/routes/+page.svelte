@@ -345,20 +345,6 @@
 		</div>
 	</form>
 	</section>
-		<section class="home-reading home-area-read" aria-labelledby="home-reading-heading">
-		<div class="home-reading-header"><h2 id="home-reading-heading" class="home-panel-heading">Read</h2><a href="/reading">All articles →</a></div>
-		<div class="home-reading-list">
-			{#each data.articles as article (article.slug)}
-				<a href={`/reading/${article.slug}`} class="home-reading-link">
-					<span class="home-reading-genre">{article.genre} · {article.sentence_count} sentences · {article.like_count} {article.like_count === 1 ? 'like' : 'likes'}</span>
-					<span class="home-reading-title">{article.title}</span>
-					<span class="home-reading-arrow" aria-hidden="true">↗</span>
-				</a>
-			{:else}
-				<p class="home-reading-empty">New reading is coming soon.</p>
-			{/each}
-		</div>
-	</section>
 	<div class="home-activity">
 	{#if errorMessage}<p class="mt-4 border-l-2 border-[var(--accent)] pl-4 text-sm text-[var(--accent-dark)]" role="alert">{errorMessage}</p>{/if}
 
@@ -524,6 +510,20 @@
 		{/if}
 	</section>
 	</div>
+	<section class="home-reading home-area-read" aria-labelledby="home-reading-heading">
+		<div class="home-reading-header"><h2 id="home-reading-heading" class="home-panel-heading">Read</h2><a href="/reading">All articles →</a></div>
+		<div class="home-reading-list">
+			{#each data.articles as article (article.slug)}
+				<a href={`/reading/${article.slug}`} class="home-reading-link">
+					<span class="home-reading-genre">{article.genre} · {article.sentence_count} sentences · {article.like_count} {article.like_count === 1 ? 'like' : 'likes'}</span>
+					<span class="home-reading-title">{article.title}</span>
+					<span class="home-reading-arrow" aria-hidden="true">↗</span>
+				</a>
+			{:else}
+				<p class="home-reading-empty">New reading is coming soon.</p>
+			{/each}
+		</div>
+	</section>
 	</div>
 
 	<footer class="mt-10 border-t border-[var(--line)] pt-4 text-xs text-[var(--ink-faint)] sm:mt-14">Jyutping romanisation · Traditional Chinese</footer>

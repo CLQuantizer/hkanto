@@ -177,3 +177,4 @@ button:focus-visible, textarea:focus-visible, .account-entry:focus-visible, .nav
 @media (min-width: 640px) { .gem-row { grid-template-columns: 2rem 1fr auto 2rem; gap: 1.5rem; padding-block: 2rem; }.gem-arrow { display: block; font-size: 1.25rem; }.upload-panel { grid-template-columns: 0.8fr 1.2fr; gap: 4rem; } }
 .github-link svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
 @media (hover: hover) { .github-link:hover { color: var(--ink); } }
+@media (max-width: 899px) { .home-area-read { margin-top: 1.5rem; } }
