@@ -1,0 +1,452 @@
+{
+  "readings": 41350,
+  "skipped": 12,
+  "vowelReadings": 17529,
+  "consonantReadings": 23809,
+  "vowels": [
+    {
+      "id": "ai",
+      "label": "-ai",
+      "example": {
+        "char": "西",
+        "jyutping": "sai1"
+      },
+      "n": 2002,
+      "counts": [
+        336,
+        224,
+        441,
+        373,
+        176,
+        452
+      ]
+    },
+    {
+      "id": "au",
+      "label": "-au",
+      "example": {
+        "char": "九",
+        "jyutping": "gau2"
+      },
+      "n": 1912,
+      "counts": [
+        474,
+        279,
+        236,
+        528,
+        136,
+        259
+      ]
+    },
+    {
+      "id": "ou",
+      "label": "-ou",
+      "example": {
+        "char": "好",
+        "jyutping": "hou2"
+      },
+      "n": 1597,
+      "counts": [
+        235,
+        248,
+        194,
+        463,
+        179,
+        278
+      ]
+    },
+    {
+      "id": "i",
+      "label": "-i",
+      "example": {
+        "char": "詩",
+        "jyutping": "si1"
+      },
+      "n": 1472,
+      "counts": [
+        444,
+        221,
+        225,
+        317,
+        80,
+        185
+      ]
+    },
+    {
+      "id": "ei",
+      "label": "-ei",
+      "example": {
+        "char": "你",
+        "jyutping": "nei5"
+      },
+      "n": 1457,
+      "counts": [
+        361,
+        166,
+        186,
+        447,
+        118,
+        179
+      ]
+    },
+    {
+      "id": "eoi",
+      "label": "-eoi",
+      "example": {
+        "char": "水",
+        "jyutping": "seoi2"
+      },
+      "n": 1339,
+      "counts": [
+        275,
+        157,
+        194,
+        247,
+        160,
+        306
+      ]
+    },
+    {
+      "id": "iu",
+      "label": "-iu",
+      "example": {
+        "char": "笑",
+        "jyutping": "siu3"
+      },
+      "n": 1224,
+      "counts": [
+        364,
+        183,
+        143,
+        282,
+        134,
+        118
+      ]
+    },
+    {
+      "id": "aa",
+      "label": "-aa",
+      "example": {
+        "char": "媽",
+        "jyutping": "maa1"
+      },
+      "n": 1149,
+      "counts": [
+        417,
+        133,
+        214,
+        178,
+        82,
+        125
+      ]
+    },
+    {
+      "id": "o",
+      "label": "-o",
+      "example": {
+        "char": "多",
+        "jyutping": "do1"
+      },
+      "n": 1094,
+      "counts": [
+        303,
+        256,
+        87,
+        297,
+        52,
+        99
+      ]
+    },
+    {
+      "id": "aai",
+      "label": "-aai",
+      "example": {
+        "char": "買",
+        "jyutping": "maai5"
+      },
+      "n": 778,
+      "counts": [
+        117,
+        105,
+        212,
+        124,
+        74,
+        146
+      ]
+    },
+    {
+      "id": "yu",
+      "label": "-yu",
+      "example": {
+        "char": "魚",
+        "jyutping": "jyu4"
+      },
+      "n": 727,
+      "counts": [
+        124,
+        51,
+        87,
+        245,
+        123,
+        97
+      ]
+    },
+    {
+      "id": "u",
+      "label": "-u",
+      "example": {
+        "char": "夫",
+        "jyutping": "fu1"
+      },
+      "n": 697,
+      "counts": [
+        247,
+        163,
+        106,
+        76,
+        3,
+        102
+      ]
+    },
+    {
+      "id": "oi",
+      "label": "-oi",
+      "example": {
+        "char": "愛",
+        "jyutping": "oi3"
+      },
+      "n": 645,
+      "counts": [
+        101,
+        141,
+        112,
+        123,
+        19,
+        149
+      ]
+    },
+    {
+      "id": "aau",
+      "label": "-aau",
+      "example": {
+        "char": "教",
+        "jyutping": "gaau3"
+      },
+      "n": 575,
+      "counts": [
+        151,
+        96,
+        96,
+        154,
+        23,
+        55
+      ]
+    },
+    {
+      "id": "ui",
+      "label": "-ui",
+      "example": {
+        "char": "杯",
+        "jyutping": "bui1"
+      },
+      "n": 500,
+      "counts": [
+        70,
+        135,
+        122,
+        79,
+        20,
+        74
+      ]
+    },
+    {
+      "id": "e",
+      "label": "-e",
+      "example": {
+        "char": "車",
+        "jyutping": "ce1"
+      },
+      "n": 325,
+      "counts": [
+        78,
+        68,
+        48,
+        61,
+        32,
+        38
+      ]
+    },
+    {
+      "id": "oe",
+      "label": "-oe",
+      "example": {
+        "char": "靴",
+        "jyutping": "hoe1"
+      },
+      "n": 31,
+      "counts": [
+        11,
+        6,
+        4,
+        8,
+        1,
+        1
+      ]
+    },
+    {
+      "id": "eu",
+      "label": "-eu",
+      "example": {
+        "char": "掉",
+        "jyutping": "deu6"
+      },
+      "n": 5,
+      "counts": [
+        1,
+        0,
+        0,
+        1,
+        0,
+        3
+      ]
+    }
+  ],
+  "consonants": [
+    {
+      "id": "m",
+      "label": "-m",
+      "example": {
+        "char": "心",
+        "jyutping": "sam1"
+      },
+      "n": 2409,
+      "counts": [
+        608,
+        390,
+        288,
+        666,
+        190,
+        267
+      ]
+    },
+    {
+      "id": "n",
+      "label": "-n",
+      "example": {
+        "char": "山",
+        "jyutping": "saan1"
+      },
+      "n": 6809,
+      "counts": [
+        1656,
+        1177,
+        973,
+        1609,
+        422,
+        972
+      ]
+    },
+    {
+      "id": "ng",
+      "label": "-ng",
+      "example": {
+        "char": "香",
+        "jyutping": "hoeng1"
+      },
+      "n": 6558,
+      "counts": [
+        2004,
+        971,
+        647,
+        1997,
+        325,
+        614
+      ]
+    },
+    {
+      "id": "p",
+      "label": "-p",
+      "example": {
+        "char": "十",
+        "jyutping": "sap6"
+      },
+      "n": 1418,
+      "counts": [
+        217,
+        25,
+        532,
+        0,
+        0,
+        644
+      ]
+    },
+    {
+      "id": "t",
+      "label": "-t",
+      "example": {
+        "char": "七",
+        "jyutping": "cat1"
+      },
+      "n": 2581,
+      "counts": [
+        468,
+        41,
+        1003,
+        3,
+        0,
+        1066
+      ]
+    },
+    {
+      "id": "k",
+      "label": "-k",
+      "example": {
+        "char": "六",
+        "jyutping": "luk6"
+      },
+      "n": 3884,
+      "counts": [
+        1297,
+        76,
+        922,
+        1,
+        0,
+        1588
+      ]
+    },
+    {
+      "id": "syllabic m",
+      "label": "m alone",
+      "example": {
+        "char": "唔",
+        "jyutping": "m4"
+      },
+      "n": 74,
+      "counts": [
+        0,
+        3,
+        0,
+        33,
+        15,
+        23
+      ]
+    },
+    {
+      "id": "syllabic ng",
+      "label": "ng alone",
+      "example": {
+        "char": "五",
+        "jyutping": "ng5"
+      },
+      "n": 76,
+      "counts": [
+        0,
+        3,
+        0,
+        33,
+        16,
+        24
+      ]
+    }
+  ]
+}

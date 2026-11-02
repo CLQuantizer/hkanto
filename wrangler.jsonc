@@ -1,0 +1,60 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "hk",
+	"account_id": "670889de2d908caac7543143db31fae5",
+	"compatibility_date": "2026-07-21",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"alias": {
+		"$lib": "./src/lib"
+	},
+	"vars": {
+		"WORKERS_AI_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
+		"WORKERS_AI_FALLBACK_MODEL": "@cf/zai-org/glm-5.3-flash"
+	},
+	"ai": {
+		"binding": "AI"
+	},
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"workers_dev": true,
+	"preview_urls": true,
+	"routes": [
+		{
+			"pattern": "hk.mywords.io",
+			"custom_domain": true
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "HK_DB",
+			"database_name": "hk",
+			"database_id": "524e37b3-cfa4-4f35-9a46-6157c8ccb1db",
+			"migrations_dir": "migrations",
+			"remote": true
+		}
+	],
+	"kv_namespaces": [
+		{
+			"binding": "HK_KV",
+			"id": "75d99e6c14804ceda1c6b51d6d8767e1"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "HK_R2",
+			"bucket_name": "hk-r2",
+			"remote": true
+		}
+	],
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true
+		}
+	}
+}
