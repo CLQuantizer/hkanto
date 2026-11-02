@@ -178,3 +178,31 @@ button:focus-visible, textarea:focus-visible, .account-entry:focus-visible, .nav
 .github-link svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
 @media (hover: hover) { .github-link:hover { color: var(--ink); } }
 @media (max-width: 899px) { .home-area-read { margin-top: 1.5rem; } }
+
+/* Sign in, sign up, account and password reset pages */
+.auth-shell { width: min(100% - 2rem, 26rem); margin-inline: auto; padding-block: clamp(1.5rem, 6vh, 3.5rem) 4rem; }
+.auth-shell h1 { font-size: clamp(2rem, 7vw, 2.75rem); font-weight: 650; line-height: 1.05; letter-spacing: -0.045em; overflow-wrap: anywhere; }
+.auth-shell h2 { font-size: 1rem; font-weight: 650; letter-spacing: -0.015em; }
+.auth-copy { margin-top: 0.6rem; color: var(--ink-muted); line-height: 1.6; }
+.auth-hint { margin-top: 0.5rem; color: var(--ink-faint); font-size: 0.85rem; line-height: 1.5; }
+.auth-value { margin-top: 0.4rem; overflow-wrap: anywhere; }
+.auth-form { display: grid; gap: 0.9rem; margin-top: 1.25rem; }
+.auth-form label { display: grid; gap: 0.4rem; color: var(--ink-muted); font-size: 0.8rem; font-weight: 650; }
+.auth-form label span { color: var(--ink-faint); font-weight: 500; }
+.auth-form input { min-height: 3rem; width: 100%; border: 1px solid var(--line-strong); background: var(--paper-raised); padding: 0.65rem 0.8rem; color: var(--ink); font-size: 1rem; }
+.auth-form .auth-hint { margin-top: -0.4rem; }
+.auth-primary, .auth-secondary { display: block; width: 100%; min-height: 3rem; margin-top: 1.25rem; padding: 0.7rem 1rem; font-weight: 650; }
+.auth-form .auth-primary, .auth-form .auth-secondary { margin-top: 0.35rem; }
+.auth-primary { background: var(--ink); color: var(--paper); }
+.auth-secondary { border: 1px solid var(--line-strong); background: transparent; color: var(--ink); }
+.auth-primary:disabled, .auth-secondary:disabled, .auth-text-button:disabled { opacity: 0.45; }
+.auth-text-button { min-height: 2.5rem; color: var(--accent-dark); font-size: 0.9rem; font-weight: 650; text-decoration: underline; text-underline-offset: 0.2em; }
+.auth-row { display: flex; gap: 1.25rem; }
+.auth-divider { display: flex; align-items: center; gap: 1rem; margin-block: 1.5rem 0; color: var(--ink-faint); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.auth-divider::before, .auth-divider::after { height: 1px; flex: 1; background: var(--line); content: ''; }
+.auth-message { margin-top: 0.9rem; color: var(--ink-muted); font-size: 0.9rem; line-height: 1.5; }
+.auth-message.error { color: var(--accent-dark); font-weight: 600; }
+.auth-links { margin-top: 1.25rem; color: var(--ink-muted); font-size: 0.9rem; }
+.auth-links a { color: var(--accent-dark); font-weight: 650; text-decoration: underline; text-underline-offset: 0.2em; }
+.auth-section { margin-top: 2rem; border-top: 1px solid var(--line); padding-top: 1.25rem; }
+.auth-shell input:focus-visible, .auth-shell button:focus-visible, .auth-shell a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }

@@ -40,6 +40,8 @@ export default defineConfig({
 				},
 			}),
 			AI: bindings.ai({}),
+			EMAIL: bindings.sendEmail({}),
+			MAIL_FROM: bindings.text("noreply@mywords.io"),
 			ASSETS: bindings.assets(),
 			ADMIN_PASSWORD: bindings.secret(),
 			GEMS_ADMIN_PASSWORD: bindings.secret(),

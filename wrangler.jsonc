@@ -12,8 +12,14 @@
 	},
 	"vars": {
 		"WORKERS_AI_MODEL": "@cf/deepseek-ai/deepseek-v4.1-flash-1017",
-		"WORKERS_AI_FALLBACK_MODEL": "@cf/zai-org/glm-5.3-flash"
+		"WORKERS_AI_FALLBACK_MODEL": "@cf/zai-org/glm-5.3-flash",
+		"MAIL_FROM": "noreply@mywords.io"
 	},
+	"send_email": [
+		{
+			"name": "EMAIL"
+		}
+	],
 	"ai": {
 		"binding": "AI"
 	},

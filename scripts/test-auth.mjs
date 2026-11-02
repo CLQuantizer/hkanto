@@ -205,12 +205,12 @@ test('session tokens fail closed', async () => {
 test('password registration and login stay on that account', async () => {
 	const registered = await accounts.registerWithPassword(db, {
 		username: 'Ada',
-		displayName: 'Ada Wong',
-		email: 'Ada@Example.com',
 		password: 'supersecret',
 		confirmPassword: 'supersecret'
 	});
 	assert.equal(registered.ok, true);
+	assert.equal((await accounts.getAccount(db, registered.value.userId)).email, null);
+	assert.equal((await accounts.setVerifiedEmail(db, registered.value.userId, 'Ada@Example.com')).ok, true);
 	const byEmail = await accounts.authenticateWithPassword(db, 'ada@example.com', 'supersecret');
 	const byName = await accounts.authenticateWithPassword(db, 'ada', 'supersecret');
 	assert.equal(byEmail.ok && byEmail.value.userId, registered.value.userId);
@@ -222,8 +222,6 @@ test('password registration and login stay on that account', async () => {
 	assert.equal(wrong.message, missing.message);
 	const duplicate = await accounts.registerWithPassword(db, {
 		username: 'ada',
-		displayName: 'Other',
-		email: '',
 		password: 'supersecret',
 		confirmPassword: 'supersecret'
 	});
@@ -250,17 +248,16 @@ test('a passkey cannot be attached to someone else’s password account', async 
 	});
 	assert.equal(own.ok, true);
 	assert.equal(own.value.username, 'ada');
-	assert.equal(own.value.displayName, 'Ada Wong');
+	assert.equal(own.value.displayName, 'ada');
 });
 
 test('history is private to the signed-in user', async () => {
 	const bob = await accounts.registerWithPassword(db, {
 		username: 'bob',
-		displayName: 'Bob',
-		email: 'bob@example.com',
 		password: 'bob-password',
 		confirmPassword: 'bob-password'
 	});
+	await accounts.setVerifiedEmail(db, bob.value.userId, 'bob@example.com');
 	const ada = await accounts.authenticateWithPassword(db, 'ada', 'supersecret');
 	await history.saveUserHistory(db, ada.value.userId, {
 		source: 'Ada private',
@@ -376,8 +373,6 @@ test('a finished password signup blocks an earlier passkey ceremony', async () =
 	const options = await optionsResponse.json();
 	const registered = await accounts.registerWithPassword(db, {
 		username: 'cara',
-		displayName: 'Cara',
-		email: 'cara@example.com',
 		password: 'cara-password',
 		confirmPassword: 'cara-password'
 	});
@@ -410,7 +405,7 @@ test('login actions set a session and reject a bad password', async () => {
 	const platform = { env: { HK_DB: db, GEMS_SESSION_SECRET: secret } };
 	await assert.rejects(
 		() =>
-			login.actions.signInWithPassword({
+			login.actions.default({
 				request: formRequest({ identifier: 'bob@example.com', password: 'bob-password' }),
 				cookies: jar.cookies,
 				platform,
@@ -426,7 +421,7 @@ test('login actions set a session and reject a bad password', async () => {
 	);
 	assert.equal(await passkeys.verifyPasskeySession(jar.read(), secret), (await accounts.authenticateWithPassword(db, 'bob', 'bob-password')).value.userId);
 
-	const rejected = await login.actions.signInWithPassword({
+	const rejected = await login.actions.default({
 		request: formRequest({ identifier: 'bob', password: 'nope-nope' }),
 		cookies: cookieJar().cookies,
 		platform,
@@ -440,42 +435,131 @@ test('login actions set a session and reject a bad password', async () => {
 test('signed-out pages hide history and show sign-in', async () => {
 	const { render } = await vite.ssrLoadModule('svelte/server');
 	const home = await vite.ssrLoadModule('/src/routes/+page.svelte');
-	const login = await vite.ssrLoadModule('/src/routes/login/+page.svelte');
-	const signedOut = render(home.default, { props: { data: { user: null } } }).body;
-	assert.match(signedOut, /href="\/login"/);
-	assert.match(signedOut, /href="\/tones"/);
-	assert.match(signedOut, />Sign in</);
-	assert.match(signedOut, />Tones</);
-	assert.match(signedOut, /private history/);
-	assert.equal(signedOut.includes('Copy'), false);
-	assert.equal(signedOut.includes('total'), false);
+	const header = await vite.ssrLoadModule('/src/lib/components/SiteHeader.svelte');
+	const loginPage = await vite.ssrLoadModule('/src/routes/login/+page.svelte');
+	const signupPage = await vite.ssrLoadModule('/src/routes/signup/+page.svelte');
+	const accountPage = await vite.ssrLoadModule('/src/routes/account/+page.svelte');
 
-	const signedIn = render(home.default, {
-		props: { data: { user: { username: 'ada', displayName: 'Ada Wong' } } }
-	}).body;
-	assert.match(signedIn, /Ada Wong/);
+	const headerOut = render(header.default, { props: { user: null, current: 'home' } }).body;
+	assert.match(headerOut, /href="\/login"/);
+	assert.match(headerOut, />Sign in</);
+	assert.match(headerOut, />Tones</);
+	const headerIn = render(header.default, { props: { user: { displayName: 'Ada Wong' }, current: 'home' } }).body;
+	assert.match(headerIn, /href="\/account"/);
+	assert.match(headerIn, /Ada Wong/);
+
+	const signedOut = render(home.default, { props: { data: { user: null, articles: [] } } }).body;
+	assert.match(signedOut, /private history/);
+	assert.equal(signedOut.includes('total'), false);
+	const signedIn = render(home.default, { props: { data: { user: { username: 'ada', displayName: 'Ada Wong' }, articles: [] } } }).body;
 	assert.match(signedIn, /Only visible on this account/);
 	assert.match(signedIn, /Loading history/);
-	assert.equal(signedIn.includes('stay on this page only'), false);
 
-	const loginOut = render(login.default, { props: { data: { user: null, passwordSaved: false }, form: null } }).body;
+	// Sign in and sign up are separate, simple pages.
+	const loginOut = render(loginPage.default, { props: { form: null } }).body;
 	assert.match(loginOut, /Sign in with a passkey/);
 	assert.match(loginOut, /Sign in with password/);
 	assert.match(loginOut, /name="identifier"/);
-	assert.match(loginOut, /Create account with a passkey/);
-	assert.match(loginOut, /type="password"/);
+	assert.match(loginOut, /href="\/signup"/);
+	assert.match(loginOut, /href="\/reset"/);
+	assert.equal(loginOut.includes('name="confirmPassword"'), false);
 
-	const loginIn = render(login.default, {
+	const signupOut = render(signupPage.default, { props: { form: null } }).body;
+	assert.match(signupOut, /name="username"/);
+	assert.match(signupOut, /name="email"/);
+	assert.match(signupOut, /optional/);
+	assert.match(signupOut, /Use a passkey instead/);
+	assert.equal(signupOut.includes('name="displayName"'), false);
+
+	const accountOut = render(accountPage.default, {
 		props: {
-			data: {
-				user: { username: 'ada', displayName: 'Ada Wong', email: 'ada@example.com', hasPassword: false, hasPasskey: true },
-				passwordSaved: false
-			},
+			data: { account: { username: 'ada', displayName: 'Ada Wong', email: null, hasPassword: false, hasPasskey: true }, notice: null },
 			form: null
 		}
 	}).body;
-	assert.match(loginIn, /Password backup/);
-	assert.match(loginIn, /Add another passkey/);
-	assert.match(loginIn, /Sign out/);
+	assert.match(accountOut, /Send confirmation link/);
+	assert.match(accountOut, /Add a password/);
+	assert.match(accountOut, /Add another passkey/);
+	assert.match(accountOut, /Sign out/);
+});
+
+test('account tokens work once, expire, and are rate limited', async () => {
+	const tokens = await vite.ssrLoadModule('/src/lib/server/account-tokens.ts');
+	const dee = await accounts.registerWithPassword(db, { username: 'dee', password: 'dee-password', confirmPassword: 'dee-password' });
+	const userId = dee.value.userId;
+	const token = await tokens.createAccountToken(db, userId, 'reset_password');
+	assert.equal(await tokens.peekAccountToken(db, token, 'reset_password'), true);
+	assert.equal(await tokens.peekAccountToken(db, token, 'verify_email'), false);
+	assert.deepEqual(await tokens.consumeAccountToken(db, token, 'reset_password'), { userId, email: null });
+	assert.equal(await tokens.consumeAccountToken(db, token, 'reset_password'), null);
+	assert.notEqual(await tokens.createAccountToken(db, userId, 'reset_password'), null);
+	assert.notEqual(await tokens.createAccountToken(db, userId, 'reset_password'), null);
+	assert.equal(await tokens.createAccountToken(db, userId, 'reset_password'), null);
+	const stored = await db.prepare('SELECT token_hash FROM account_tokens LIMIT 1').first();
+	assert.equal(stored.token_hash.includes(token), false);
+	await db.prepare("UPDATE account_tokens SET expires_at = '2000-01-01T00:00:00.000Z' WHERE user_id = ?1").bind(userId).run();
+	const verify = await tokens.createAccountToken(db, userId, 'verify_email', 'dee@example.com');
+	await db.prepare("UPDATE account_tokens SET expires_at = '2000-01-01T00:00:00.000Z' WHERE purpose = 'verify_email'").run();
+	assert.equal(await tokens.consumeAccountToken(db, verify, 'verify_email'), null);
+});
+
+test('emails are saved only after the link is clicked, and resets sign you in', async () => {
+	const sent = [];
+	const env = { HK_DB: db, GEMS_SESSION_SECRET: secret, EMAIL: { send: async (message) => { sent.push(message); return { messageId: 'm' }; } } };
+	const signup = await vite.ssrLoadModule('/src/routes/signup/+page.server.ts');
+	const reset = await vite.ssrLoadModule('/src/routes/reset/+page.server.ts');
+	const resetToken = await vite.ssrLoadModule('/src/routes/reset/[token]/+page.server.ts');
+	const verify = await vite.ssrLoadModule('/src/routes/verify-email/[token]/+page.server.ts');
+	const tokenFrom = (message) => message.text.match(/\/(?:reset|verify-email)\/([A-Za-z0-9_-]+)/)[1];
+
+	const jar = cookieJar();
+	await assert.rejects(
+		() => signup.actions.default({
+			request: formRequest({ username: 'eve', password: 'eve-password', confirmPassword: 'eve-password', email: 'Eve@Example.com' }),
+			cookies: jar.cookies, platform: { env }, url: new URL('http://localhost/signup'), locals: { passkeyUserId: null }
+		}),
+		(err) => isRedirect(err) && err.location === '/account?verify=sent'
+	);
+	const eveId = await passkeys.verifyPasskeySession(jar.read(), secret);
+	assert.equal((await accounts.getAccount(db, eveId)).email, null);
+	assert.equal(sent.length, 1);
+	assert.equal(sent[0].to, 'eve@example.com');
+
+	// Without a confirmed email there is nothing to reset, and the reply does not say so.
+	const quiet = await reset.actions.default({ request: formRequest({ identifier: 'eve' }), platform: { env }, url: new URL('http://localhost/reset') });
+	const unknown = await reset.actions.default({ request: formRequest({ identifier: 'nobody' }), platform: { env }, url: new URL('http://localhost/reset') });
+	assert.deepEqual(quiet, unknown);
+	assert.equal(sent.length, 1);
+
+	const confirmed = await verify.load({ params: { token: tokenFrom(sent[0]) }, platform: { env } });
+	assert.equal(confirmed.ok, true);
+	assert.equal((await accounts.getAccount(db, eveId)).email, 'eve@example.com');
+	assert.equal((await verify.load({ params: { token: tokenFrom(sent[0]) }, platform: { env } })).ok, false);
+
+	await reset.actions.default({ request: formRequest({ identifier: 'eve@example.com' }), platform: { env }, url: new URL('http://localhost/reset') });
+	assert.equal(sent.length, 2);
+	const token = tokenFrom(sent[1]);
+	assert.equal((await resetToken.load({ params: { token }, platform: { env } })).valid, true);
+	const mismatch = await resetToken.actions.default({
+		params: { token }, request: formRequest({ password: 'new-password', confirmPassword: 'other-password' }),
+		platform: { env }, cookies: cookieJar().cookies, url: new URL('http://localhost/reset/x')
+	});
+	assert.equal(mismatch.status, 400);
+	const resetJar = cookieJar();
+	await assert.rejects(
+		() => resetToken.actions.default({
+			params: { token }, request: formRequest({ password: 'new-password', confirmPassword: 'new-password' }),
+			platform: { env }, cookies: resetJar.cookies, url: new URL('http://localhost/reset/x')
+		}),
+		(err) => isRedirect(err) && err.location === '/account?password=reset'
+	);
+	assert.equal(await passkeys.verifyPasskeySession(resetJar.read(), secret), eveId);
+	assert.equal((await accounts.authenticateWithPassword(db, 'eve', 'new-password')).ok, true);
+	assert.equal((await accounts.authenticateWithPassword(db, 'eve', 'eve-password')).ok, false);
+	const reused = await resetToken.actions.default({
+		params: { token }, request: formRequest({ password: 'third-password', confirmPassword: 'third-password' }),
+		platform: { env }, cookies: cookieJar().cookies, url: new URL('http://localhost/reset/x')
+	});
+	assert.equal(reused.status, 410);
 });
 });

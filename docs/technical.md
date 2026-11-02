@@ -6,7 +6,7 @@ The working manual for this repo, written for coding agents and useful to humans
 
 - SvelteKit (Svelte 5, TypeScript) on Cloudflare Workers via `@sveltejs/adapter-cloudflare`, styled with Tailwind CSS 4.
 - Package manager: pnpm. Node version: `.nvmrc`.
-- Bindings (declared in `cloudflare.config.ts` and `wrangler.jsonc`): D1 `HK_DB`, KV `HK_KV`, R2 `HK_R2`, Workers AI `AI`, static `ASSETS`.
+- Bindings (declared in `cloudflare.config.ts` and `wrangler.jsonc`): D1 `HK_DB`, KV `HK_KV`, R2 `HK_R2`, Workers AI `AI`, Email Service `EMAIL` (sends as `MAIL_FROM`), static `ASSETS`.
 - Workers AI models: `WORKERS_AI_MODEL` (`@cf/deepseek-ai/deepseek-v4.1-flash-1017`) with `WORKERS_AI_FALLBACK_MODEL` (`@cf/zai-org/glm-5.3-flash`).
 - Svelte work: use the Svelte MCP server (`.mcp.json`) and run its `svelte-autofixer` on every changed component until it reports nothing. See `CLAUDE.md`.
 
@@ -20,6 +20,7 @@ pnpm build               # wrangler types + vite build
 pnpm run deploy          # build, then deploy with the Cloudflare CLI (`cf`)
 pnpm build:tones         # rebuild src/lib/tones/distribution.json
 pnpm test:tones
+node scripts/test-auth.mjs   # accounts, sessions, history, email links
 pnpm build:reading-seed  # write data/reading-seed.batch.json
 pnpm enrich:reading      # optional: Workers AI Jyutping for sentences that have none
 ```
@@ -46,7 +47,11 @@ Set one with `cf workers secrets update <NAME> --worker hk --type secret_text --
 | `/` | Translator (left column: input, results, history) and the top 4 reading articles (right column) |
 | `/reading`, `/reading/[slug]` | Reading room: Jyutping/Yale toggle, per-sentence translation, pronunciation reports, likes |
 | `/tones` | Tone distribution charts |
-| `/login` | Passkey or password sign-in |
+| `/login` | Sign in with a passkey or a password |
+| `/signup` | Create an account: username and password, optional email |
+| `/account` | Email (add, change, remove), password, passkeys, sign out |
+| `/reset`, `/reset/[token]` | Request a password reset email; choose a new password |
+| `/verify-email/[token]` | Confirms an email address from its link |
 | `/admin` | Pronunciation reports and Jyutping editing (6-month session) |
 | `/gems`, `/gems/admin` | Markdown articles CMS |
 | `/api/translate`, `/api/history` | Translator API and per-account history |
@@ -86,6 +91,15 @@ The splitter in `scripts/reading-data.mjs` ends a sentence at 。！？!?…, ke
 ## Accounts and history
 
 Anyone can translate without an account, but those translations are not saved. Signed-in history is private to its account. Sign-in is by passkey (discoverable credentials) or by username/email and password. Passwords are stored as PBKDF2-SHA-256 hashes, capped at the Workers iteration limit. Passkeys work on `http://localhost` and on HTTPS, on the same host.
+
+Sign-up asks only for a username and password (or a passkey). The display name starts as the username.
+
+### Email and password reset
+
+- Email is optional. An address entered at sign-up or on `/account` is saved to `passkey_users.email` only after its owner opens the confirmation link, so nobody can attach someone else's address.
+- `account_tokens` stores single-use links as SHA-256 hashes. Reset links last 1 hour and email links last 24 hours. Each account can create at most 3 per hour for each purpose. A successful reset revokes the account's other reset links and signs the user in.
+- `/reset` gives the same reply whether or not an account exists or has an email.
+- Email goes out through the `EMAIL` binding (`src/lib/server/mailer.ts`). Sending fails gracefully until the sending domain is onboarded: Cloudflare dashboard → Compute → Email Service → Email Sending → Onboard Domain (`mywords.io`). Sending to arbitrary recipients requires Workers Paid. Failed sends are logged as `email_send_failed`.
 
 ## Tone charts
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -43,6 +43,7 @@
 	let cardPreviewUrl = $state('');
 	let cardBlob = $state<Blob | null>(null);
 	let cardBusy = $state(false);
+	let cardSection = $state<HTMLElement | null>(null);
 	let history = $state<HistoryItem[]>([]);
 	let historyPage = $state(1);
 	let historyTotal = $state(0);
@@ -148,6 +149,15 @@
 			cardPreviewUrl = URL.createObjectURL(blob);
 		}
 		cardBusy = false;
+		if (blob) await revealCard();
+	}
+
+	async function revealCard() {
+		await tick();
+		if (!cardSection) return;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		cardSection.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+		cardSection.querySelector<HTMLElement>('#card-heading')?.focus({ preventScroll: true });
 	}
 
 	async function shareCard() {
@@ -411,10 +421,10 @@
 	{/if}
 
 	{#if cardPreviewUrl && cardTranslation}
-		<section class="card-maker mt-8" aria-labelledby="card-heading">
+		<section {@attach (node) => { cardSection = node; return () => { cardSection = null; }; }} class="card-maker mt-8 scroll-mt-4" aria-labelledby="card-heading">
 			<div>
 				<p class="mb-1 text-xs font-semibold tracking-[0.16em] text-[var(--accent)] uppercase">Share card</p>
-				<h2 id="card-heading" class="text-xl font-semibold tracking-[-0.02em] text-[var(--ink)]">Ready for Instagram</h2>
+				<h2 id="card-heading" tabindex="-1" class="outline-none text-xl font-semibold tracking-[-0.02em] text-[var(--ink)]">Ready for Instagram</h2>
 				<p class="mt-2 max-w-sm text-sm leading-6 text-[var(--ink-muted)]">Share the image from your phone and choose Instagram, or download it for later.</p>
 				<div class="mt-5 flex flex-wrap gap-2">
 					<button class="primary-button" type="button" onclick={shareCard}>Share image <span aria-hidden="true">↗</span></button>

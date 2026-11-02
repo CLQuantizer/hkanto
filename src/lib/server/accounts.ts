@@ -170,17 +170,16 @@ async function claimAccount(
 	return { ok: true, value: { userId } };
 }
 
+/** Sign-up asks only for a username and password. The display name starts as the username; email is added later and verified. */
 export async function registerWithPassword(
 	db: D1Database,
-	input: { username: string; displayName: string; email: string; password: string; confirmPassword: string }
+	input: { username: string; password: string; confirmPassword: string }
 ): Promise<AccountResult<{ userId: string }>> {
 	const username = normalizeUsername(input.username);
-	const displayName = normalizeDisplayName(input.displayName);
-	const email = normalizeEmail(input.email);
-	const problem = usernameError(username) ?? displayNameError(displayName) ?? emailError(email) ?? passwordError(input.password);
+	const problem = usernameError(username) ?? passwordError(input.password);
 	if (problem) return failure(400, problem);
 	if (input.password !== input.confirmPassword) return failure(400, 'Those passwords don’t match.');
-	return claimAccount(db, username, displayName, email, await hashPassword(input.password));
+	return claimAccount(db, username, username, '', await hashPassword(input.password));
 }
 
 export async function authenticateWithPassword(
@@ -233,11 +232,11 @@ export async function preparePasskeyAccount(
 	}
 
 	const username = normalizeUsername(input.username);
-	const displayName = normalizeDisplayName(input.displayName);
-	const email = normalizeEmail(input.email);
-	const problem = usernameError(username) ?? displayNameError(displayName) ?? emailError(email);
+	const displayName = normalizeDisplayName(input.displayName) || username;
+	const problem = usernameError(username) ?? displayNameError(displayName);
 	if (problem) return failure(400, problem);
-	const claimed = await claimAccount(db, username, displayName, email, null);
+	// Email is never taken here: it is added from the account page and verified by link.
+	const claimed = await claimAccount(db, username, displayName, '', null);
 	if (!claimed.ok) return claimed;
 	return { ok: true, value: { userId: claimed.value.userId, username, displayName } };
 }
@@ -279,3 +278,47 @@ export async function deleteIncompleteAccount(db: D1Database, userId: string) {
 		.bind(userId)
 		.run();
 }
+
+/** Finds the account a reset request refers to. Only accounts with a verified email can be reset. */
+export async function findResettableAccount(db: D1Database, identifier: string): Promise<{ userId: string; email: string } | null> {
+	const normalized = identifier.trim().toLowerCase();
+	if (!normalized || normalized.length > 254) return null;
+	const row = await db
+		.prepare(`SELECT id, email FROM passkey_users WHERE ${normalized.includes('@') ? 'email' : 'username'} = ?1 AND email IS NOT NULL`)
+		.bind(normalized)
+		.first<{ id: string; email: string }>();
+	return row ? { userId: row.id, email: row.email } : null;
+}
+
+export async function resetAccountPassword(
+	db: D1Database,
+	userId: string,
+	input: { password: string; confirmPassword: string }
+): Promise<AccountResult<{ userId: string }>> {
+	const problem = passwordError(input.password);
+	if (problem) return failure(400, problem);
+	if (input.password !== input.confirmPassword) return failure(400, 'Those passwords don’t match.');
+	await db.prepare('UPDATE passkey_users SET password_hash = ?1 WHERE id = ?2').bind(await hashPassword(input.password), userId).run();
+	return { ok: true, value: { userId } };
+}
+
+/** Saves an email address after its owner clicked the verification link. */
+export async function setVerifiedEmail(db: D1Database, userId: string, email: string): Promise<AccountResult<{ email: string }>> {
+	const normalized = normalizeEmail(email);
+	const problem = emailError(normalized);
+	if (problem || !normalized) return failure(400, problem ?? 'Enter a valid email address.');
+	if (await emailTakenBySomeoneElse(db, normalized, userId)) return failure(409, 'That email is already used by another account.');
+	try {
+		await db.prepare('UPDATE passkey_users SET email = ?1 WHERE id = ?2').bind(normalized, userId).run();
+	} catch (err) {
+		if (isUniqueConstraint(err)) return failure(409, 'That email is already used by another account.');
+		throw err;
+	}
+	return { ok: true, value: { email: normalized } };
+}
+
+export async function removeAccountEmail(db: D1Database, userId: string) {
+	await db.prepare('UPDATE passkey_users SET email = NULL WHERE id = ?1').bind(userId).run();
+}
+
+export { emailTakenBySomeoneElse };
