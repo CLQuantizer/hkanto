@@ -77,6 +77,7 @@ It was written for agents ([AGENTS.md](AGENTS.md)). Humans may read it too. We w
 
 - The chiuman were written by anonymous geniuses of Hong Kong forums. We only added the pronunciation. If one is yours: hello, and thank you.
 - Some chiuman are rude. Some are mean. That is the genre, not our opinion.
+- Code and romanization data: [MIT](LICENSE). The chiuman texts in `data/chiuman/` belong to their original authors and are not covered.
 - Tone data comes from the LSHK Jyutping table (CC BY 4.0) and Unicode Unihan `kCantonese` (Unicode License v3).
 
 唔該 · m4 goi1 · thanks
