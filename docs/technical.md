@@ -99,7 +99,7 @@ Sign-up asks only for a username and password (or a passkey). The display name s
 - Email is optional. An address entered at sign-up or on `/account` is saved to `passkey_users.email` only after its owner opens the confirmation link, so nobody can attach someone else's address.
 - `account_tokens` stores single-use links as SHA-256 hashes. Reset links last 1 hour and email links last 24 hours. Each account can create at most 3 per hour for each purpose. A successful reset revokes the account's other reset links and signs the user in.
 - `/reset` gives the same reply whether or not an account exists or has an email.
-- Email goes out through the `EMAIL` binding (`src/lib/server/mailer.ts`). Sending fails gracefully until the sending domain is onboarded: Cloudflare dashboard → Compute → Email Service → Email Sending → Onboard Domain (`mywords.io`). Sending to arbitrary recipients requires Workers Paid. Failed sends are logged as `email_send_failed`.
+- Email goes out through the `EMAIL` binding (`src/lib/server/mailer.ts`). `mywords.io` is onboarded as a sending domain. Its DNS records are on `cf-bounce.mywords.io` and `_dmarc.mywords.io`. To set up another domain: `cf email-sending subdomains create --zone <domain> --name <domain>`, then `cf email-sending subdomains dns fix <id> --zone <domain>`; check with `dns status`. The account quota is at `cf email-sending limits get`. Failed sends are logged as `email_send_failed` and the page shows a calm message instead.
 
 ## Tone charts
 
