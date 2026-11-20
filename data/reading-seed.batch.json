@@ -7270,7 +7270,7 @@
       "男人痾尿的較量",
       "潮文",
       "data/chiuman/男人痾尿的較量.md",
-      "58982b736cf17864cde6f0389065777d529990440be2cedf2b9bd4203950d710",
+      "950b74784d31b9323fa43057a6b46cd1693242ab44d38f57de7d6858288bebc7",
       1000
     ]
   },
@@ -7416,10 +7416,10 @@
   {
     "sql": "INSERT INTO reading_sentences (id, cantonese, jyutping, yale, annotation_model) VALUES (?1, ?2, ?3, ?4, ?5)\n\t\t\t ON CONFLICT(id) DO UPDATE SET cantonese=excluded.cantonese, jyutping=excluded.jyutping,\n\t\t\t yale=excluded.yale, annotation_model=excluded.annotation_model\n\t\t\t WHERE reading_sentences.annotation_model IS NOT 'admin'",
     "params": [
-      "7d10d1f32c94242002a8e6973cda4a3d900d68160fa5a299bdbc3a1665a1725b",
-      "不過家陣已經好少呢d場，依家d廁所唔知做乜，硬係要響尿兜同尿兜之間加塊野遮住，一下唔留神真係以為入錯左女廁 有次我個鬼佬朋友黎香港，一見到我地d廁所咁既格局，就冷笑左一聲 我知佢個心一定係諗緊「東亞病夫」四個字，我覺得好羞恥 果晚我含淚寫左封信去康文署 (https://evchk.fandom.com/zh/wiki/%E5%BA%B7%E6%96%87%E7%BD%B2)，要求佢移除公廁入面果塊死人板 其實一個「真正既男廁」，尿兜同尿兜之間果塊板根本就唔應該存在 入得黎痾尿既，就預左要同人較量，痾尿痾到遮遮掩掩，不如鴨尿片算喇",
-      "bat1 gwo3 gaa1 zan6 ji5 ging1 hou2 siu2 ni1 di1 coeng4 ， ji1 gaa1 di1 ci3 so2 m4 zi1 zou6 mat1 ， ngaang6 hai6 jiu3 hai2 niu6 dau1 tung4 niu6 dau1 zi1 gaan1 gaa1 faai3 je5 ze1 zyu6 ， jat1 haa5 m4 lau4 san4 zan1 hai6 ji5 wai4 jap6 co3 zo2 neoi5 ci3 jau5 ci3 ngo5 go3 gwai2 lou2 pang4 jau5 lai4 hoeng1 gong2 ， jat1 gin3 dou2 ngo5 dei6 di1 ci3 so2 gam2 ge3 gaak3 guk6 ， zau6 laang5 siu3 zo2 jat1 seng1 ngo5 zi1 keoi5 go3 sam1 jat1 ding6 hai6 nam2 gan2 「 dung1 aa3 beng6 fu1 」 sei3 go3 zi6 ， ngo5 gok3 dak1 hou2 sau1 ci2 go2 maan5 ngo5 ham4 leoi6 se2 zo2 fung1 seon3 heoi3 hong1 man4 cyu5 ( https://evchk.fandom.com/zh/wiki/%E5%BA%B7%E6%96%87%E7%BD%B2 ) ， jiu1 kau4 keoi5 ji4 ceoi4 gung1 ci3 jap6 min6 go2 faai3 sei2 jan4 baan2 kei4 sat6 jat1 go3 「 zan1 zing3 ge3 naam4 ci3 」 ， niu6 dau1 tung4 niu6 dau1 zi1 gaan1 go2 faai3 baan2 gan1 bun2 zau6 m4 jing1 goi1 cyun4 zoi6 jap6 dak1 lai4 o1 niu6 ge3 ， zau6 jyu6 zo2 jiu3 tung4 jan4 gaau3 loeng6 ， o1 niu6 o1 dou3 ze1 ze1 jim2 jim2 ， bat1 jyu4 aap3 niu6 pin2 syun3 laa3",
-      "bāt gwo gā jahn yíh gīng hóu síu nī dī chèuhng ， yī gā dī chi só m̀h jī jouh māt ， ngaahng haih yiu hái niuh dāu tùhng niuh dāu jī gāan gā faai yéh jē jyuh ， yāt háh m̀h làuh sàhn jān haih yíh wàih yahp cho jó néuih chi yáuh chi ngóh go gwái lóu pàhng yáuh làih hēung góng ， yāt gin dóu ngóh deih dī chi só gám ge gaak guhk ， jauh láahng siu jó yāt sēng ngóh jī kéuih go sām yāt dihng haih nám gán 「 dūng a behng fū 」 sei go jih ， ngóh gok dāk hóu sāu chí gó máahn ngóh hàhm leuih sé jó fūng seun heui hōng màhn chyúh ( https://evchk.fandom.com/zh/wiki/%E5%BA%B7%E6%96%87%E7%BD%B2 ) ， yīu kàuh kéuih yìh chèuih gūng chi yahp mihn gó faai séi yàhn báan kèih saht yāt go 「 jān jing ge nàahm chi 」 ， niuh dāu tùhng niuh dāu jī gāan gó faai báan gān bún jauh m̀h yīng gōi chyùhn joih yahp dāk làih ō niuh ge ， jauh yuh jó yiu tùhng yàhn gaau leuhng ， ō niuh ō dou jē jē yím yím ， bāt yùh aap niuh pín syun la",
+      "5d5dee00fc4f99f3b5fb9057040932b1615bdd8e7bca62a06bb22a31410d5a23",
+      "不過家陣已經好少呢d場，依家d廁所唔知做乜，硬係要響尿兜同尿兜之間加塊野遮住，一下唔留神真係以為入錯左女廁 有次我個鬼佬朋友黎香港，一見到我地d廁所咁既格局，就冷笑左一聲 我知佢個心一定係諗緊「東亞病夫」四個字，我覺得好羞恥 果晚我含淚寫左封信去康文署，要求佢移除公廁入面果塊死人板 其實一個「真正既男廁」，尿兜同尿兜之間果塊板根本就唔應該存在 入得黎痾尿既，就預左要同人較量，痾尿痾到遮遮掩掩，不如鴨尿片算喇",
+      "bat1 gwo3 gaa1 zan6 ji5 ging1 hou2 siu2 ni1 di1 coeng4， ji1 gaa1 di1 ci3 so2 m4 zi1 zou6 mat1， ngaang6 hai6 jiu3 hai2 niu6 dau1 tung4 niu6 dau1 zi1 gaan1 gaa1 faai3 je5 ze1 zyu6， jat1 haa5 m4 lau4 san4 zan1 hai6 ji5 wai4 jap6 co3 zo2 neoi5 ci3 jau5 ci3 ngo5 go3 gwai2 lou2 pang4 jau5 lai4 hoeng1 gong2， jat1 gin3 dou2 ngo5 dei6 di1 ci3 so2 gam2 ge3 gaak3 guk6， zau6 laang5 siu3 zo2 jat1 seng1 ngo5 zi1 keoi5 go3 sam1 jat1 ding6 hai6 nam2 gan2 「 dung1 aa3 beng6 fu1 」 sei3 go3 zi6， ngo5 gok3 dak1 hou2 sau1 ci2 go2 maan5 ngo5 ham4 leoi6 se2 zo2 fung1 seon3 heoi3 hong1 man4 cyu5， jiu1 kau4 keoi5 ji4 ceoi4 gung1 ci3 jap6 min6 go2 faai3 sei2 jan4 baan2 kei4 sat6 jat1 go3 「 zan1 zing3 ge3 naam4 ci3 」， niu6 dau1 tung4 niu6 dau1 zi1 gaan1 go2 faai3 baan2 gan1 bun2 zau6 m4 jing1 goi1 cyun4 zoi6 jap6 dak1 lai4 o1 niu6 ge3， zau6 jyu6 zo2 jiu3 tung4 jan4 gaau3 loeng6， o1 niu6 o1 dou3 ze1 ze1 jim2 jim2， bat1 jyu4 aap3 niu6 pin2 syun3 laa3",
+      "bāt gwo gā jahn yíh gīng hóu síu nī dī chèuhng， yī gā dī chi só m̀h jī jouh māt， ngaahng haih yiu hái niuh dāu tùhng niuh dāu jī gāan gā faai yéh jē jyuh， yāt háh m̀h làuh sàhn jān haih yíh wàih yahp cho jó néuih chi yáuh chi ngóh go gwái lóu pàhng yáuh làih hēung góng， yāt gin dóu ngóh deih dī chi só gám ge gaak guhk， jauh láahng siu jó yāt sēng ngóh jī kéuih go sām yāt dihng haih nám gán 「 dūng a behng fū 」 sei go jih， ngóh gok dāk hóu sāu chí gó máahn ngóh hàhm leuih sé jó fūng seun heui hōng màhn chyúh， yīu kàuh kéuih yìh chèuih gūng chi yahp mihn gó faai séi yàhn báan kèih saht yāt go 「 jān jing ge nàahm chi 」， niuh dāu tùhng niuh dāu jī gāan gó faai báan gān bún jauh m̀h yīng gōi chyùhn joih yahp dāk làih ō niuh ge， jauh yuh jó yiu tùhng yàhn gaau leuhng， ō niuh ō dou jē jē yím yím， bāt yùh aap niuh pín syun la",
       "reviewed"
     ]
   },
@@ -7429,7 +7429,7 @@
       "naam-jan-o-niu-dik-gaau-loeng",
       7,
       3,
-      "7d10d1f32c94242002a8e6973cda4a3d900d68160fa5a299bdbc3a1665a1725b"
+      "5d5dee00fc4f99f3b5fb9057040932b1615bdd8e7bca62a06bb22a31410d5a23"
     ]
   },
   {
@@ -7473,10 +7473,10 @@
   {
     "sql": "INSERT INTO reading_sentences (id, cantonese, jyutping, yale, annotation_model) VALUES (?1, ?2, ?3, ?4, ?5)\n\t\t\t ON CONFLICT(id) DO UPDATE SET cantonese=excluded.cantonese, jyutping=excluded.jyutping,\n\t\t\t yale=excluded.yale, annotation_model=excluded.annotation_model\n\t\t\t WHERE reading_sentences.annotation_model IS NOT 'admin'",
     "params": [
-      "51adb1abd9efc359ac6f6e5c4a5ac15ae0a67c54b3fe6d09c687893a3c795bcb",
-      "有d小朋友 (https://evchk.fandom.com/zh/wiki/%E5%B0%8F%E6%9C%8B%E5%8F%8B)以為果度愈大愈好。",
-      "jau5 di1 siu2 pang4 jau5 ( https://evchk.fandom.com/zh/wiki/%E5%B0%8F%E6%9C%8B%E5%8F%8B ) ji5 wai4 go2 dou6 jyu6 daai6 jyu6 hou2 。",
-      "yáuh dī síu pàhng yáuh ( https://evchk.fandom.com/zh/wiki/%E5%B0%8F%E6%9C%8B%E5%8F%8B ) yíh wàih gó douh yuh daaih yuh hóu 。",
+      "b0b9752076005906106858cad9037a9dc8187850ecf4aa09483ead52d3e609be",
+      "有d小朋友以為果度愈大愈好。",
+      "jau5 di1 siu2 pang4 jau5 ji5 wai4 go2 dou6 jyu6 daai6 jyu6 hou2。",
+      "yáuh dī síu pàhng yáuh yíh wàih gó douh yuh daaih yuh hóu。",
       "reviewed"
     ]
   },
@@ -7486,7 +7486,7 @@
       "naam-jan-o-niu-dik-gaau-loeng",
       10,
       5,
-      "51adb1abd9efc359ac6f6e5c4a5ac15ae0a67c54b3fe6d09c687893a3c795bcb"
+      "b0b9752076005906106858cad9037a9dc8187850ecf4aa09483ead52d3e609be"
     ]
   },
   {
@@ -7701,10 +7701,10 @@
   {
     "sql": "INSERT INTO reading_sentences (id, cantonese, jyutping, yale, annotation_model) VALUES (?1, ?2, ?3, ?4, ?5)\n\t\t\t ON CONFLICT(id) DO UPDATE SET cantonese=excluded.cantonese, jyutping=excluded.jyutping,\n\t\t\t yale=excluded.yale, annotation_model=excluded.annotation_model\n\t\t\t WHERE reading_sentences.annotation_model IS NOT 'admin'",
     "params": [
-      "1c89a43e8baa6107dedfc6f52ef53912d91122083a447b36f536719771645f41",
-      "另外,我有一段時間好鐘意入女廁痾屎 事先聲明，我唔係變態佬，我唔會執佢地用過d m巾黎聞，亦都唔會響入面打飛機 (https://evchk.fandom.com/zh/wiki/%E6%89%93%E9%A3%9B%E6%A9%9F) 我入去真係為左痾屎，不過我既痾法有小小特別 我入到去唔會即刻痾，我會等有人入黎先開始痾 聽到有人入黎之後，我會好用力咁爆d屎出黎 唔知點解，我好鐘意俾人聽到我放屁痾屎既聲，一諗起佢地聽到我屎眼發出既聲音，我就會痾得好舒暢",
-      "ling6 ngoi6 , ngo5 jau5 jat1 dyun6 si4 gaan3 hou2 zung1 ji3 jap6 neoi5 ci3 o1 si2 si6 sin1 sing1 ming4 ， ngo5 m4 hai6 bin3 taai3 lou2 ， ngo5 m4 wui5 zap1 keoi5 dei6 jung6 gwo3 di1 m gan1 lai4 man4 ， jik6 dou1 m4 wui5 hai2 jap6 min6 daa2 fei1 gei1 ( https://evchk.fandom.com/zh/wiki/%E6%89%93%E9%A3%9B%E6%A9%9F ) ngo5 jap6 heoi3 zan1 hai6 wai6 zo2 o1 si2 ， bat1 gwo3 ngo5 ge3 o1 faat3 jau5 siu2 siu2 dak6 bit6 ngo5 jap6 dou3 heoi3 m4 wui5 zik1 hak1 o1 ， ngo5 wui5 dang2 jau5 jan4 jap6 lai4 sin1 hoi1 ci2 o1 teng1 dou2 jau5 jan4 jap6 lai4 zi1 hau6 ， ngo5 wui5 hou2 jung6 lik6 gam3 baau3 di1 si2 ceot1 lai4 m4 zi1 dim2 gaai2 ， ngo5 hou2 zung1 ji3 bei2 jan4 teng1 dou2 ngo5 fong3 pei3 o1 si2 ge3 seng1 ， jat1 nam2 hei2 keoi5 dei6 teng1 dou2 ngo5 si2 ngaan5 faat3 ceot1 ge3 seng1 jam1 ， ngo5 zau6 wui5 o1 dak1 hou2 syu1 coeng3",
-      "lihng ngoih , ngóh yáuh yāt dyuhn sìh gaan hóu jūng yi yahp néuih chi ō sí sih sīn sīng mìhng ， ngóh m̀h haih bin taai lóu ， ngóh m̀h wúih jāp kéuih deih yuhng gwo dī m gān làih màhn ， yihk dōu m̀h wúih hái yahp mihn dá fēi gēi ( https://evchk.fandom.com/zh/wiki/%E6%89%93%E9%A3%9B%E6%A9%9F ) ngóh yahp heui jān haih waih jó ō sí ， bāt gwo ngóh ge ō faat yáuh síu síu dahk biht ngóh yahp dou heui m̀h wúih jīk hāk ō ， ngóh wúih dáng yáuh yàhn yahp làih sīn hōi chí ō tēng dóu yáuh yàhn yahp làih jī hauh ， ngóh wúih hóu yuhng lihk gam baau dī sí chēut làih m̀h jī dím gáai ， ngóh hóu jūng yi béi yàhn tēng dóu ngóh fong pei ō sí ge sēng ， yāt nám héi kéuih deih tēng dóu ngóh sí ngáahn faat chēut ge sēng yām ， ngóh jauh wúih ō dāk hóu syū cheung",
+      "f6c2a1ce54bad400f6eee63226d798e5fad8c49caa985d451c0bf8d469fa80ec",
+      "另外,我有一段時間好鐘意入女廁痾屎 事先聲明，我唔係變態佬，我唔會執佢地用過d m巾黎聞，亦都唔會響入面打飛機 我入去真係為左痾屎，不過我既痾法有小小特別 我入到去唔會即刻痾，我會等有人入黎先開始痾 聽到有人入黎之後，我會好用力咁爆d屎出黎 唔知點解，我好鐘意俾人聽到我放屁痾屎既聲，一諗起佢地聽到我屎眼發出既聲音，我就會痾得好舒暢",
+      "ling6 ngoi6 , ngo5 jau5 jat1 dyun6 si4 gaan3 hou2 zung1 ji3 jap6 neoi5 ci3 o1 si2 si6 sin1 sing1 ming4， ngo5 m4 hai6 bin3 taai3 lou2， ngo5 m4 wui5 zap1 keoi5 dei6 jung6 gwo3 di1 m gan1 lai4 man4， jik6 dou1 m4 wui5 hai2 jap6 min6 daa2 fei1 gei1 ngo5 jap6 heoi3 zan1 hai6 wai6 zo2 o1 si2， bat1 gwo3 ngo5 ge3 o1 faat3 jau5 siu2 siu2 dak6 bit6 ngo5 jap6 dou3 heoi3 m4 wui5 zik1 hak1 o1， ngo5 wui5 dang2 jau5 jan4 jap6 lai4 sin1 hoi1 ci2 o1 teng1 dou2 jau5 jan4 jap6 lai4 zi1 hau6， ngo5 wui5 hou2 jung6 lik6 gam3 baau3 di1 si2 ceot1 lai4 m4 zi1 dim2 gaai2， ngo5 hou2 zung1 ji3 bei2 jan4 teng1 dou2 ngo5 fong3 pei3 o1 si2 ge3 seng1， jat1 nam2 hei2 keoi5 dei6 teng1 dou2 ngo5 si2 ngaan5 faat3 ceot1 ge3 seng1 jam1， ngo5 zau6 wui5 o1 dak1 hou2 syu1 coeng3",
+      "lihng ngoih , ngóh yáuh yāt dyuhn sìh gaan hóu jūng yi yahp néuih chi ō sí sih sīn sīng mìhng， ngóh m̀h haih bin taai lóu， ngóh m̀h wúih jāp kéuih deih yuhng gwo dī m gān làih màhn， yihk dōu m̀h wúih hái yahp mihn dá fēi gēi ngóh yahp heui jān haih waih jó ō sí， bāt gwo ngóh ge ō faat yáuh síu síu dahk biht ngóh yahp dou heui m̀h wúih jīk hāk ō， ngóh wúih dáng yáuh yàhn yahp làih sīn hōi chí ō tēng dóu yáuh yàhn yahp làih jī hauh， ngóh wúih hóu yuhng lihk gam baau dī sí chēut làih m̀h jī dím gáai， ngóh hóu jūng yi béi yàhn tēng dóu ngóh fong pei ō sí ge sēng， yāt nám héi kéuih deih tēng dóu ngóh sí ngáahn faat chēut ge sēng yām， ngóh jauh wúih ō dāk hóu syū cheung",
       "reviewed"
     ]
   },
@@ -7714,7 +7714,7 @@
       "naam-jan-o-niu-dik-gaau-loeng",
       22,
       8,
-      "1c89a43e8baa6107dedfc6f52ef53912d91122083a447b36f536719771645f41"
+      "f6c2a1ce54bad400f6eee63226d798e5fad8c49caa985d451c0bf8d469fa80ec"
     ]
   },
   {
