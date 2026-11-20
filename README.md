@@ -21,7 +21,7 @@ not the way the exam wants it written.
 Type a sentence. Get two Cantonese versions back, each wearing its Jyutping. Copy one. Leave.
 
 **→ read**
-潮文. *chiuman.* The copypasta literature of the Hong Kong internet:
+潮文. The copypasta literature of the Hong Kong internet:
 a minibus driver who out-drives Formula 1,
 徐庶's five-step plan to unify the Three Kingdoms,
 a man who changes the world by wearing his boxers up a hill.
@@ -52,12 +52,12 @@ That is the whole project, really.
 SvelteKit on Cloudflare Workers.
 D1 remembers.
 Workers AI translates.
-Every chiuman sentence (368 of them) had its Jyutping checked by hand, syllable by syllable.
+Every 潮文 sentence has Jyutping, checked syllable by syllable.
 Yale is *derived* from Jyutping, so the two can never disagree.
 
 Heard a wrong tone? Every sentence has a **report** button.
 Complaints are a feature, not a bug.
-Liked a chiuman? There's a ♥. The popular ones float up.
+Liked a 潮文? There's a ♥. The popular ones float up.
 
 ---
 
@@ -75,9 +75,9 @@ It was written for agents ([AGENTS.md](AGENTS.md)). Humans may read it too. We w
 
 ## fine print / 細字 / ~~small text~~
 
-- The chiuman were written by anonymous geniuses of Hong Kong forums. We only added the pronunciation. If one is yours: hello, and thank you.
-- Some chiuman are rude. Some are mean. That is the genre, not our opinion.
-- Code and romanization data: [MIT](LICENSE). The chiuman texts in `data/chiuman/` belong to their original authors and are not covered.
+- The 潮文 were written by anonymous geniuses of Hong Kong forums. We only added the pronunciation. If one is yours: hello, and thank you.
+- Some 潮文 are rude. Some are mean. That is the genre, not our opinion.
+- Code and romanization data: [MIT](LICENSE). The 潮文 texts in `data/chiuman/` belong to their original authors and are not covered.
 - Tone data comes from the LSHK Jyutping table (CC BY 4.0) and Unicode Unihan `kCantonese` (Unicode License v3).
 
 唔該 · m4 goi1 · thanks

@@ -44,7 +44,8 @@ function syllableToYale({ initial, final, tone }: JyutpingSyllable): string {
 
 /** Converts every toned Jyutping syllable to Yale; English words, numbers and punctuation pass through. */
 export function jyutpingToYale(jyutping: string): string {
-	return jyutping.replace(/[A-Za-z]+[1-6]/g, (token) => {
+	return jyutping.replace(/https:\/\/[^\s<>"'）)]+|[A-Za-z]+[1-6]/g, (token) => {
+		if (token.startsWith('https://')) return token;
 		const parsed = parseJyutpingSyllable(token);
 		return parsed ? syllableToYale(parsed) : token;
 	}).normalize('NFC');

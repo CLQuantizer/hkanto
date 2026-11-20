@@ -135,6 +135,28 @@
 		expandedPosition = expandedPosition === sentence.position ? null : sentence.position;
 		if (expandedPosition !== null) void loadTranslation(sentence);
 	}
+
+	function linkifyCantonese(text: string) {
+		const parts: { text: string; href?: string }[] = [];
+		const pattern = /https:\/\/[^\s<>"'）)]+/g;
+		let last = 0;
+		for (const match of text.matchAll(pattern)) {
+			const start = match.index ?? 0;
+			if (start > last) parts.push({ text: text.slice(last, start) });
+			const candidate = match[0];
+			try {
+				const url = new URL(candidate);
+				if (url.protocol === 'https:') parts.push({ text: candidate, href: url.href });
+				else parts.push({ text: candidate });
+			} catch {
+				parts.push({ text: candidate });
+			}
+			last = start + candidate.length;
+		}
+		if (last < text.length) parts.push({ text: text.slice(last) });
+		return parts;
+	}
+
 </script>
 
 <svelte:head><title>{data.article.title} · Read Cantonese</title></svelte:head>
@@ -169,7 +191,7 @@
 			<div class="reader-paragraph">
 				{#each paragraph as sentence (sentence.position)}
 					<section class="reader-sentence" aria-label={`Sentence ${sentence.position + 1}`}>
-						<p class="reader-cantonese">{sentence.cantonese}</p>
+						<p class="reader-cantonese">{#each linkifyCantonese(sentence.cantonese) as part, partIndex (partIndex)}{#if part.href}<a href={part.href} rel="noopener noreferrer" target="_blank">{part.text}</a>{:else}{part.text}{/if}{/each}</p>
 						<div class="romanization-slot" aria-hidden={!showRomanization}>
 							<p class={{ concealed: !showRomanization || romanization !== 'jyutping' }} lang="yue-Latn">{sentence.jyutping ?? 'Pronunciation pending'}</p>
 							<p class={{ concealed: !showRomanization || romanization !== 'yale' }} lang="yue-Latn">{sentence.yale ?? 'Pronunciation pending'}</p>
@@ -229,6 +251,7 @@
 	.reader-article { padding-block: 1.6rem; }
 	.reader-paragraph + .reader-paragraph { margin-top: 1.7rem; }
 	.reader-sentence + .reader-sentence { margin-top: 0.4rem; }
+	.reader-cantonese a { color: var(--accent-dark); text-decoration: underline; text-underline-offset: 0.18em; overflow-wrap: anywhere; }
 	.reader-cantonese { font-family: "Noto Sans HK", "PingFang HK", sans-serif; font-size: clamp(1.25rem, 2.6vw, 1.5rem); line-height: 1.6; overflow-wrap: anywhere; }
 	.romanization-slot { display: grid; margin-top: 0.05rem; color: var(--ink-faint); font-size: 0.83rem; line-height: 1.5; overflow-wrap: anywhere; }
 	.romanization-slot p { grid-area: 1 / 1; }
